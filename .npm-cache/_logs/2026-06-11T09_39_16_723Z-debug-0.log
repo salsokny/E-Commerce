@@ -1,0 +1,75 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@11.9.0
+2 info using node@v24.14.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/sokny/Documents/ecommerce-app/.npmrc
+5 silly config load:file:/Users/sokny/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install @ngrx/store @ngrx/effects @ngrx/store-devtools @angular/material @angular/cdk
+8 verbose argv "install" "@ngrx/store" "@ngrx/effects" "@ngrx/store-devtools" "@angular/material" "@angular/cdk"
+9 verbose logfile logs-max:10 dir:/Users/sokny/Documents/ecommerce-app/.npm-cache/_logs/2026-06-11T09_39_16_723Z-
+10 verbose logfile /Users/sokny/Documents/ecommerce-app/.npm-cache/_logs/2026-06-11T09_39_16_723Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest @ngrx/store@*
+15 silly packumentCache full:https://registry.npmjs.org/@ngrx%2fstore cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/@ngrx%2fstore 1190ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/@ngrx%2fstore set size:undefined disposed:false
+18 silly fetch manifest @angular/core@^16.2.0
+19 silly packumentCache full:https://registry.npmjs.org/@angular%2fcore cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/@angular%2fcore 519ms (cache revalidated)
+21 silly packumentCache full:https://registry.npmjs.org/@angular%2fcore set size:3040375 disposed:false
+22 silly fetch manifest @angular/core@^21.0.0
+23 silly packumentCache full:https://registry.npmjs.org/@angular%2fcore cache-miss
+24 http cache https://registry.npmjs.org/@angular%2fcore 11ms (cache hit)
+25 silly packumentCache full:https://registry.npmjs.org/@angular%2fcore set size:3040375 disposed:false
+26 silly fetch manifest rxjs@~7.8.0
+27 silly packumentCache full:https://registry.npmjs.org/rxjs cache-miss
+28 http fetch GET 200 https://registry.npmjs.org/rxjs 462ms (cache revalidated)
+29 silly packumentCache full:https://registry.npmjs.org/rxjs set size:980097 disposed:false
+30 silly fetch manifest zone.js@~0.13.0
+31 silly packumentCache full:https://registry.npmjs.org/zone.js cache-miss
+32 http fetch GET 200 https://registry.npmjs.org/zone.js 369ms (cache revalidated)
+33 silly packumentCache full:https://registry.npmjs.org/zone.js set size:378576 disposed:false
+34 verbose stack Error: unable to resolve dependency tree
+34 verbose stack     at #failPeerConflict (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1402:25)
+34 verbose stack     at #loadPeerSet (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1368:33)
+34 verbose stack     at async #buildDepStep (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:916:11)
+34 verbose stack     at async Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:170:7)
+34 verbose stack     at async Promise.all (index 1)
+34 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:110:5)
+34 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:151:5)
+34 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:208:9)
+34 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:67:5)
+35 error code ERESOLVE
+36 error ERESOLVE unable to resolve dependency tree
+37 error
+38 error While resolving: ecommerce-app@0.0.0
+38 error Found: @angular/core@16.2.12
+38 error node_modules/@angular/core
+38 error   @angular/core@"^16.2.0" from the root project
+38 error
+38 error Could not resolve dependency:
+38 error peer @angular/core@"^21.0.0" from @ngrx/store@21.1.1
+38 error node_modules/@ngrx/store
+38 error   @ngrx/store@"*" from the root project
+38 error
+38 error Fix the upstream dependency conflict, or retry
+38 error this command with --force or --legacy-peer-deps
+38 error to accept an incorrect (and potentially broken) dependency resolution.
+39 error
+39 error
+39 error For a full report see:
+39 error /Users/sokny/Documents/ecommerce-app/.npm-cache/_logs/2026-06-11T09_39_16_723Z-eresolve-report.txt
+40 silly unfinished npm timer reify 1781170756954
+41 silly unfinished npm timer reify:loadTrees 1781170756954
+42 silly unfinished npm timer idealTree:buildDeps 1781170757139
+43 silly unfinished npm timer idealTree:#root 1781170757139
+44 verbose cwd /Users/sokny/Documents/ecommerce-app
+45 verbose os Darwin 25.2.0
+46 verbose node v24.14.0
+47 verbose npm  v11.9.0
+48 verbose exit 1
+49 verbose code 1
+50 error A complete log of this run can be found in: /Users/sokny/Documents/ecommerce-app/.npm-cache/_logs/2026-06-11T09_39_16_723Z-debug-0.log

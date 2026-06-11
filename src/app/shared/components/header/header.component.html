@@ -1,0 +1,111 @@
+<header
+  class="fixed top-0 left-0 w-full bg-slate-800 text-white shadow-md z-50"
+>
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Brand -->
+    <div class="flex items-center gap-16">
+      <button
+        class="text-xl sm:text-2xl font-bold hover:text-blue-400 transition"
+        (click)="navigateTo('/')"
+      >
+        🛍️ E-Commerce
+      </button>
+
+      <div class="hidden sm:flex items-center gap-6">
+        <button (click)="navigateTo('/products')" class="hover:text-blue-400">
+          Products
+        </button>
+
+        <button
+          (click)="navigateTo('/cart')"
+          class="relative hover:text-blue-400"
+        >
+          Cart
+
+          <span
+            class="absolute -top-2 -right-3 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
+            *ngIf="cartItemCount$ | async as count"
+          >
+            {{ count }}
+          </span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu Button -->
+    <button class="sm:hidden text-white text-2xl" (click)="toggleMenu()">
+      ☰
+    </button>
+
+    <!-- Desktop Menu -->
+    <div class="hidden sm:flex items-center gap-8">
+      <ng-container *ngIf="isAuthenticated$ | async; else notAuth">
+        <span class="text-gray-300 text-sm">
+          {{ (user$ | async)?.name }}
+        </span>
+
+        <button
+          class="px-3 py-1.5 bg-red-500 rounded hover:bg-red-600 text-sm"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </ng-container>
+
+      <ng-template #notAuth>
+        <button
+          class="px-3 py-1.5 bg-blue-500 rounded hover:bg-blue-600 text-sm"
+          (click)="navigateTo('/login')"
+        >
+          Login
+        </button>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="menuOpen" class="sm:hidden bg-slate-900 px-4 py-3 space-y-3">
+    <button
+      class="block w-full text-left"
+      (click)="navigateTo('/products'); closeMenu()"
+    >
+      Products
+    </button>
+
+    <button
+      class="block w-full text-left relative"
+      (click)="navigateTo('/cart'); closeMenu()"
+    >
+      Cart
+      <span
+        class="ml-2 bg-red-500 text-white rounded-full px-2 text-xs"
+        *ngIf="cartItemCount$ | async as count"
+      >
+        {{ count }}
+      </span>
+    </button>
+
+    <div class="border-t border-gray-700 pt-3">
+      <ng-container *ngIf="isAuthenticated$ | async; else mobileLogin">
+        <div class="text-gray-300 mb-2">
+          {{ (user$ | async)?.name }}
+        </div>
+
+        <button
+          class="w-full bg-red-500 py-2 rounded"
+          (click)="logout(); closeMenu()"
+        >
+          Logout
+        </button>
+      </ng-container>
+
+      <ng-template #mobileLogin>
+        <button
+          class="w-full bg-blue-500 py-2 rounded"
+          (click)="navigateTo('/login'); closeMenu()"
+        >
+          Login
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</header>

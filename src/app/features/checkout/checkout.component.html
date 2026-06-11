@@ -1,0 +1,246 @@
+<div class="mx-auto max-w-7xl px-4 py-8">
+  <h1 class="mb-8 text-3xl font-bold text-slate-800">Checkout</h1>
+
+  <div class="grid gap-8 lg:grid-cols-[1fr_350px]">
+    <div class="rounded-lg bg-white p-4 shadow-md sm:p-8">
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div
+          *ngIf="error"
+          class="mb-4 rounded border-l-4 border-red-600 bg-red-100 p-4 text-red-700"
+        >
+          {{ error }}
+        </div>
+
+        <fieldset class="mb-8 border-0 p-0">
+          <legend
+            class="mb-4 w-full border-b-2 border-gray-200 pb-3 text-lg font-bold text-slate-800"
+          >
+            Shipping Information
+          </legend>
+
+          <div class="mb-4">
+            <label
+              for="email"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+              >Email</label
+            >
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+            <span
+              class="mt-1 block text-sm text-red-500"
+              *ngIf="
+                checkoutForm.get('email')?.invalid &&
+                checkoutForm.get('email')?.touched
+              "
+            >
+              Valid email is required
+            </span>
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="fullName"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+              >Full Name</label
+            >
+            <input
+              id="fullName"
+              type="text"
+              formControlName="fullName"
+              class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+            <span
+              class="mt-1 block text-sm text-red-500"
+              *ngIf="
+                checkoutForm.get('fullName')?.invalid &&
+                checkoutForm.get('fullName')?.touched
+              "
+            >
+              Full name is required
+            </span>
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="street"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+              >Street Address</label
+            >
+            <input
+              id="street"
+              type="text"
+              formControlName="street"
+              class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="mb-4">
+              <label
+                for="city"
+                class="mb-2 block text-sm font-semibold text-slate-800"
+                >City</label
+              >
+              <input
+                id="city"
+                type="text"
+                formControlName="city"
+                class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="zipCode"
+                class="mb-2 block text-sm font-semibold text-slate-800"
+                >Zip Code</label
+              >
+              <input
+                id="zipCode"
+                type="text"
+                formControlName="zipCode"
+                class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="country"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+              >Country</label
+            >
+            <input
+              id="country"
+              type="text"
+              formControlName="country"
+              class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+          </div>
+        </fieldset>
+
+        <fieldset class="mb-8 border-0 p-0">
+          <legend
+            class="mb-4 w-full border-b-2 border-gray-200 pb-3 text-lg font-bold text-slate-800"
+          >
+            Payment Information
+          </legend>
+
+          <div class="mb-4">
+            <label
+              for="cardNumber"
+              class="mb-2 block text-sm font-semibold text-slate-800"
+              >Card Number</label
+            >
+            <input
+              id="cardNumber"
+              type="text"
+              formControlName="cardNumber"
+              placeholder="1234567890123456"
+              class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+            />
+            <span
+              class="mt-1 block text-sm text-red-500"
+              *ngIf="
+                checkoutForm.get('cardNumber')?.invalid &&
+                checkoutForm.get('cardNumber')?.touched
+              "
+            >
+              16-digit card number required
+            </span>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="mb-4">
+              <label
+                for="expiryDate"
+                class="mb-2 block text-sm font-semibold text-slate-800"
+                >Expiry Date</label
+              >
+              <input
+                id="expiryDate"
+                type="text"
+                formControlName="expiryDate"
+                placeholder="MM/YY"
+                class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+              <span
+                class="mt-1 block text-sm text-red-500"
+                *ngIf="
+                  checkoutForm.get('expiryDate')?.invalid &&
+                  checkoutForm.get('expiryDate')?.touched
+                "
+              >
+                MM/YY format required
+              </span>
+            </div>
+            <div class="mb-4">
+              <label
+                for="cvv"
+                class="mb-2 block text-sm font-semibold text-slate-800"
+                >CVV</label
+              >
+              <input
+                id="cvv"
+                type="text"
+                formControlName="cvv"
+                placeholder="123"
+                class="w-full rounded border border-gray-300 px-3 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-100"
+              />
+              <span
+                class="mt-1 block text-sm text-red-500"
+                *ngIf="
+                  checkoutForm.get('cvv')?.invalid &&
+                  checkoutForm.get('cvv')?.touched
+                "
+              >
+                3-digit CVV required
+              </span>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <button
+            type="button"
+            class="rounded-lg bg-gray-500 px-4 py-2 font-semibold text-white transition hover:bg-gray-600"
+            (click)="backToCart()"
+          >
+            Back to Cart
+          </button>
+          <button
+            type="submit"
+            class="rounded-lg bg-green-600 px-4 py-2 font-semibold text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-300"
+            [disabled]="loading || !checkoutForm.valid"
+          >
+            {{ loading ? "Processing..." : "Place Order" }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="h-fit rounded-lg bg-white p-6 shadow-md lg:sticky lg:top-24">
+      <h2 class="mb-4 text-xl font-bold text-slate-800">Order Summary</h2>
+      <div class="mb-4 max-h-72 overflow-y-auto">
+        <div
+          class="mb-3 flex justify-between border-b border-gray-200 pb-3 text-sm text-gray-500 last:border-b-0"
+          *ngFor="let item of cartItems$ | async"
+        >
+          <span>{{ item.product.name }} × {{ item.quantity }}</span>
+          <span class="font-semibold text-green-600"
+            >${{ item.product.price * item.quantity }}</span
+          >
+        </div>
+      </div>
+      <div
+        class="flex justify-between border-t-2 border-gray-200 pt-4 text-lg font-bold text-slate-800"
+      >
+        <span>Total:</span>
+        <span class="text-green-600">${{ cartTotal$ | async }}</span>
+      </div>
+    </div>
+  </div>
+</div>

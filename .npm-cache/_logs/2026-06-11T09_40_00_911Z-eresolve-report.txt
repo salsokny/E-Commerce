@@ -1,0 +1,21 @@
+'Log files:
+/Users/sokny/Documents/ecommerce-app/.npm-cache/_logs/2026-06-11T09_40_00_911Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: ecommerce-app@0.0.0
+Found: @angular/common@16.2.12
+node_modules/@angular/common
+  @angular/common@"^16.2.0" from the root project
+
+Could not resolve dependency:
+peer @angular/common@"^22.0.0 || ^23.0.0" from @angular/cdk@22.0.1
+node_modules/@angular/cdk
+  @angular/cdk@"*" from the root project
+  peer @angular/cdk@"22.0.1" from @angular/material@22.0.1
+  node_modules/@angular/material
+    @angular/material@"*" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.
