@@ -1,0 +1,59 @@
+<div
+  class="flex min-h-[calc(100vh-5rem)] w-full items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-700 px-4 py-8"
+>
+  <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl sm:p-8">
+    <h1 class="mb-8 text-center text-3xl font-bold text-slate-800">Login</h1>
+
+    <div
+      *ngIf="error$ | async as error"
+      class="mb-4 rounded border-l-4 border-red-600 bg-red-100 p-4 text-red-700"
+    >
+      {{ error }}
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-6">
+        <label for="username" class="mb-2 block font-semibold text-slate-800"
+          >Username</label
+        >
+        <input
+          id="username"
+          type="username"
+          formControlName="username"
+          class="w-full rounded border-2 border-gray-200 px-3 py-3 text-sm transition focus:border-indigo-500 focus:outline-none"
+          placeholder="Enter your username"
+        />
+      </div>
+
+      <div class="mb-6">
+        <label for="password" class="mb-2 block font-semibold text-slate-800"
+          >Password</label
+        >
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="w-full rounded border-2 border-gray-200 px-3 py-3 text-sm transition focus:border-indigo-500 focus:outline-none"
+          placeholder="••••••••"
+        />
+        <span
+          class="mt-1 block text-sm text-red-500"
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+        >
+          Password must be at least 6 characters
+        </span>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full rounded-lg bg-gradient-to-br from-indigo-500 to-purple-700 px-4 py-3 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
+        [disabled]="loading$ | async"
+      >
+        {{ (loading$ | async) ? "Logging in..." : "Login" }}
+      </button>
+    </form>
+  </div>
+</div>

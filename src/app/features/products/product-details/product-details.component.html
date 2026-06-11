@@ -1,0 +1,125 @@
+<div class="mx-auto w-full max-w-7xl px-4 py-6">
+  <button
+    class="mb-6 inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2 text-gray-700 shadow-sm ring-1 ring-gray-200 transition hover:bg-gray-50 hover:shadow-md active:scale-[0.98]"
+    (click)="goBack()"
+  >
+    <span class="text-lg">←</span>
+    <span class="font-medium">Back to Products</span>
+  </button>
+
+  <div class="relative min-h-[500px]">
+    <!-- Loading Spinner Overlay -->
+    <div
+      *ngIf="loading"
+      class="absolute inset-0 flex items-center justify-center bg-white/60 z-10"
+    >
+      <div
+        class="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"
+      ></div>
+    </div>
+
+    <!-- Error -->
+    <div
+      *ngIf="error"
+      class="rounded bg-red-100 p-4 text-center text-lg text-red-700"
+    >
+      {{ error }}
+    </div>
+
+    <!-- Product Content -->
+    <div
+      *ngIf="product && !loading"
+      class="grid gap-8 rounded-lg bg-white p-6 shadow-md md:grid-cols-2 md:gap-12 md:p-8"
+    >
+      <div
+        class="flex items-center justify-center overflow-hidden rounded-lg bg-gray-100"
+      >
+        <img
+          [src]="product.image"
+          [alt]="product.name"
+          class="max-h-[500px] w-full object-cover"
+        />
+      </div>
+
+      <div class="flex flex-col gap-6">
+        <h1 class="text-3xl font-bold text-gray-800">{{ product.name }}</h1>
+
+        <div class="flex flex-wrap gap-3 text-sm">
+          <span class="rounded-full bg-blue-100 px-4 py-2 text-blue-700">
+            Category: {{ product.category }}
+          </span>
+
+          <span
+            class="rounded-full bg-orange-100 px-4 py-2 text-orange-600"
+            *ngIf="product.rating"
+          >
+            ⭐ Rating: {{ 5 }}/5
+          </span>
+        </div>
+
+        <p class="text-base leading-7 text-gray-600">
+          {{ product.description }}
+        </p>
+
+        <div
+          class="flex flex-wrap items-center gap-6 border-y border-gray-200 py-4"
+        >
+          <span class="text-3xl font-bold text-blue-600">
+            ${{ product.price }}
+          </span>
+
+          <span
+            class="rounded px-4 py-2 text-sm"
+            [ngClass]="
+              product.stock > 0
+                ? 'bg-green-100 text-green-700'
+                : 'bg-red-100 text-red-700'
+            "
+          >
+            {{
+              product.stock > 0 ? product.stock + " in stock" : "Out of Stock"
+            }}
+          </span>
+        </div>
+
+        <!-- Quantity -->
+        <div class="flex items-center gap-4">
+          <label class="font-medium text-gray-800">Quantity:</label>
+
+          <button
+            class="h-10 w-10 rounded border border-gray-300 bg-white text-xl hover:bg-blue-600 hover:text-white disabled:opacity-50"
+            (click)="decreaseQuantity()"
+            [disabled]="quantity <= 1"
+          >
+            −
+          </button>
+
+          <input
+            type="number"
+            [(ngModel)]="quantity"
+            min="1"
+            [max]="product.stock"
+            class="w-20 rounded border border-gray-300 p-2 text-center"
+          />
+
+          <button
+            class="h-10 w-10 rounded-lg border border-gray-300 bg-white text-xl hover:bg-blue-600 hover:text-white disabled:opacity-50"
+            (click)="increaseQuantity()"
+            [disabled]="quantity >= product.stock"
+          >
+            +
+          </button>
+        </div>
+
+        <!-- Add to Cart -->
+        <button
+          class="w-full rounded-lg bg-blue-600 px-6 py-3 text-lg font-semibold text-white hover:bg-blue-700 disabled:bg-gray-300"
+          (click)="addToCart()"
+          [disabled]="product.stock === 0"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
