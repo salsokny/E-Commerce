@@ -1,5 +1,5 @@
 <div
-  class="flex min-h-[calc(100vh-5rem)] w-full items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-700 px-4 py-8"
+  class="flex min-h-[calc(100vh-5rem)] w-full items-center justify-center bg-gradient-to-br px-4 py-8"
 >
   <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-xl sm:p-8">
     <h1 class="mb-8 text-center text-3xl font-bold text-slate-800">Login</h1>
@@ -18,11 +18,34 @@
         >
         <input
           id="username"
-          type="username"
+          type="text"
           formControlName="username"
           class="w-full rounded border-2 border-gray-200 px-3 py-3 text-sm transition focus:border-indigo-500 focus:outline-none"
+          [class.border-red-500]="
+            loginForm.get('username')?.invalid &&
+            loginForm.get('username')?.touched
+          "
           placeholder="Enter your username"
         />
+
+        <span
+          class="mt-1 block text-sm text-red-500"
+          *ngIf="
+            loginForm.get('username')?.hasError('required') &&
+            loginForm.get('username')?.touched
+          "
+        >
+          Username is required
+        </span>
+        <span
+          class="mt-1 block text-sm text-red-500"
+          *ngIf="
+            loginForm.get('username')?.hasError('pattern') &&
+            loginForm.get('username')?.touched
+          "
+        >
+          Username must be 3-20 letters or numbers
+        </span>
       </div>
 
       <div class="mb-6">
@@ -35,7 +58,12 @@
           formControlName="password"
           class="w-full rounded border-2 border-gray-200 px-3 py-3 text-sm transition focus:border-indigo-500 focus:outline-none"
           placeholder="••••••••"
+          [class.border-red-500]="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
         />
+
         <span
           class="mt-1 block text-sm text-red-500"
           *ngIf="

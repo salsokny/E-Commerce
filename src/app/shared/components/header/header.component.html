@@ -12,23 +12,25 @@
       </button>
 
       <div class="hidden sm:flex items-center gap-6">
-        <button (click)="navigateTo('/products')" class="hover:text-blue-400">
-          Products
-        </button>
+        <ng-container *ngIf="isAuthenticated$ | async">
+          <button (click)="navigateTo('/products')" class="hover:text-blue-400">
+            Products
+          </button>
 
-        <button
-          (click)="navigateTo('/cart')"
-          class="relative hover:text-blue-400"
-        >
-          Cart
-
-          <span
-            class="absolute -top-2 -right-3 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
-            *ngIf="cartItemCount$ | async as count"
+          <button
+            (click)="navigateTo('/cart')"
+            class="relative hover:text-blue-400"
           >
-            {{ count }}
-          </span>
-        </button>
+            Cart
+
+            <span
+              class="absolute -top-2 -right-3 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
+              *ngIf="cartItemCount$ | async as count"
+            >
+              {{ count }}
+            </span>
+          </button>
+        </ng-container>
       </div>
     </div>
     <!-- Mobile Menu Button -->
@@ -64,25 +66,27 @@
 
   <!-- Mobile Menu -->
   <div *ngIf="menuOpen" class="sm:hidden bg-slate-900 px-4 py-3 space-y-3">
-    <button
-      class="block w-full text-left"
-      (click)="navigateTo('/products'); closeMenu()"
-    >
-      Products
-    </button>
-
-    <button
-      class="block w-full text-left relative"
-      (click)="navigateTo('/cart'); closeMenu()"
-    >
-      Cart
-      <span
-        class="ml-2 bg-red-500 text-white rounded-full px-2 text-xs"
-        *ngIf="cartItemCount$ | async as count"
+    <ng-container *ngIf="isAuthenticated$ | async">
+      <button
+        class="block w-full text-left"
+        (click)="navigateTo('/products'); closeMenu()"
       >
-        {{ count }}
-      </span>
-    </button>
+        Products
+      </button>
+
+      <button
+        class="block w-full text-left relative"
+        (click)="navigateTo('/cart'); closeMenu()"
+      >
+        Cart
+        <span
+          class="ml-2 bg-red-500 text-white rounded-full px-2 text-xs"
+          *ngIf="cartItemCount$ | async as count"
+        >
+          {{ count }}
+        </span>
+      </button>
+    </ng-container>
 
     <div class="border-t border-gray-700 pt-3">
       <ng-container *ngIf="isAuthenticated$ | async; else mobileLogin">

@@ -10,13 +10,13 @@ const initialState: CartState = {
 export const cartReducer = createReducer(
   initialState,
   on(CartActions.addToCart, (state, { product, quantity }) => {
-    const existingItem = state.items.find(
-      (item) => item.product.id === product.id,
+    const existingItem = state?.items?.find(
+      (item) => item?.product?.id === product.id,
     );
     const items = existingItem
       ? state.items.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
+          item?.product?.id === product?.id
+            ? { ...item, quantity: item?.quantity + quantity }
             : item,
         )
       : [...state.items, { product, quantity }];
@@ -27,7 +27,9 @@ export const cartReducer = createReducer(
     };
   }),
   on(CartActions.removeFromCart, (state, { productId }) => {
-    const items = state.items.filter((item) => item.product.id !== productId);
+    const items = state?.items?.filter(
+      (item) => item?.product?.id !== productId,
+    );
     return {
       ...state,
       items,
@@ -36,15 +38,17 @@ export const cartReducer = createReducer(
   }),
   on(CartActions.updateCartQuantity, (state, { productId, quantity }) => {
     if (quantity <= 0) {
-      const items = state.items.filter((item) => item.product.id !== productId);
+      const items = state.items?.filter(
+        (item) => item?.product?.id !== productId,
+      );
       return {
         ...state,
         items,
         total: calculateTotal(items),
       };
     }
-    const items = state.items.map((item) =>
-      item.product.id === productId ? { ...item, quantity } : item,
+    const items = state.items?.map((item) =>
+      item.product?.id === productId ? { ...item, quantity } : item,
     );
     return {
       ...state,
@@ -62,7 +66,7 @@ export const cartReducer = createReducer(
 
 function calculateTotal(items: CartItem[]): number {
   return items.reduce(
-    (total, item) => total + item.product.price * item.quantity,
+    (total, item) => total + item?.product?.price * item?.quantity,
     0,
   );
 }
