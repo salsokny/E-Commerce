@@ -38,10 +38,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.store.dispatch(AuthActions.login({ username, password }));
+  async onSubmit(): Promise<void> {
+    try {
+      this.loginForm.markAllAsTouched();
+
+      if (this.loginForm.invalid) {
+        return;
+      }
+      const { username, password } = this.loginForm.getRawValue();
+      this.store.dispatch(
+        AuthActions.login({
+          username,
+          password,
+        }),
+      );
+    } catch (error) {
+      console.error(error);
     }
   }
 }

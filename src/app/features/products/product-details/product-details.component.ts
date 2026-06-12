@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../core/models';
 import * as CartActions from '../../../store/cart/cart.actions';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -32,20 +33,22 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  private loadProduct(id: number): void {
+  private async loadProduct(id: number): Promise<void> {
     this.loading = true;
     this.error = null;
-    this.productService.getProductById(id).subscribe({
-      next: (product) => {
-        this.product = product;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Failed to load product details';
-        this.loading = false;
-        console.error('Error loading product:', err);
-      },
-    });
+
+    try {
+      const product = await firstValueFrom(
+        this.productService.getProductById(id),
+      );
+
+      this.product = product;
+    } catch (err) {
+      this.error = 'Failed to load product details';
+      console.error('Caught server exception:', err);
+    } finally {
+      this.loading = false;
+    }
   }
 
   addToCart(): void {
@@ -56,7 +59,11 @@ export class ProductDetailsComponent implements OnInit {
           quantity: this.quantity,
         }),
       );
-      alert(`Added ${this.quantity} item(s) to cart!`);
+      try {
+        localStorage.setItem('last_action', 'added_to_cart');
+      } catch (e) {
+        console.error('Browser localStorage is full or blocked!', e);
+      }
     }
   }
 
